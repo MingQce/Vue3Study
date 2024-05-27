@@ -2,13 +2,17 @@
   <!-- html -->
   <div class="app">
     <h1>你好,世界</h1>
+    <Person/>
   </div>
 </template>
 
 <script lang="ts">
 // JS
+  import Person from "@/components/Person.vue";
   export default {
-    name:'App'
+    name:'App',  //组件名
+    components:{Person}  //注册组件
+
   }
 </script>
 
