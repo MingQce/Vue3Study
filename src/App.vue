@@ -1,9 +1,7 @@
 <template>
   <!-- html -->
-  <div class="app">
-    <h1>你好,世界</h1>
-    <Person/>
-  </div>
+
+  <Person/>  <!--vue3允许多个根标签并列-->
 </template>
 
 <script lang="ts">

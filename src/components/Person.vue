@@ -1,7 +1,6 @@
 <template>
   <!-- html -->
   <div class="person">
-    <h1>你好,世界</h1>
     <h2>姓名:{{name}}</h2>
     <h2>年龄:{{age}}</h2>
     <button @click="changeName">修改名字</button>
@@ -14,23 +13,30 @@
 // JS
 export default {
   name:'Person',
-  data(){
-    return{
-      name:'张三',
-      age:18,
-      tel:'1388888888'
-    }
+  beforeCreate() {  //生命周期
+
   },
-  methods:{
-    showTel(){
-      alert(this.tel)
-    },
-    changeName(){
-      this.name = 'zhang-san'
-    },
-    changeAge(){
-      this.age += 1
+  setup(){  //
+    // setup中无法使用this关键字，是undefined,Vue3
+    // 数据
+    // 使用let定义数据时，参数不是响应式的，无法被后续方法改变
+    let name = '张三'
+    let age = 18
+    let tel = '1388888888'
+    // 方法
+    function changeName (){
+      name = 'zhang-san'  //确实改变了name的值，但无法传到前端
+
     }
+    function changeAge (){
+      age += 1
+
+    }
+    function showTel(){
+      alert(tel)
+    }
+    return {name, age, changeName, changeAge, showTel}  //返回值
+
   }
 }
 </script>
