@@ -8,7 +8,7 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 export default defineConfig({
   plugins: [  //调用
     vue(),
-    VueSetupExtend()
+    VueSetupExtend(),
   ],
   resolve: {
     alias: {

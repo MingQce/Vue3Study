@@ -19,17 +19,18 @@
 <!--需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件，省略注释部分-->
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return
-  let name = '张三'
-  let age = 18
+  import {ref} from 'vue'  //引入ref，配置响应式数据
+  let name = ref('张三')  //用ref包裹数据，即可声明为响应式数据
+  let age = ref(18)  //下面的电话和地址只是字符串，而name和age变为了一个对象，
   let tel = '1388888888'
   let address = '北京'
   // 方法
   function changeName (){
-    name = 'zhang-san'  //确实改变了name的值，但无法传到前端
+    name.value = 'zhang-san'  //加上.value表示修改的是响应式数据name的值
 
   }
   function changeAge (){
-    age += 1
+    age.value += 1
 
   }
   function showTel(){
