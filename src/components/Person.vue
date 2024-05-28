@@ -35,7 +35,9 @@ export default {
     function showTel(){
       alert(tel)
     }
-    return {name, age, changeName, changeAge, showTel}  //返回值
+    return {name,age,tel,changeName,changeAge,showTel}
+    //setup的返回值也可以是一个渲染函数
+    // return () => 'hh'  箭头函数
 
   }
 }
