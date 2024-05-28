@@ -3,44 +3,38 @@
   <div class="person">
     <h2>姓名:{{name}}</h2>
     <h2>年龄:{{age}}</h2>
+    <h2>地址:{{address}}</h2>
     <button @click="changeName">修改名字</button>
     <button @click="changeAge">修改年龄</button>
     <button @click="showTel">查看联系方式</button>
   </div>
 </template>
 
-<script lang="ts">
-// JS
-export default {
-  name:'Person',
-  beforeCreate() {  //生命周期
+<!--<script lang="ts">-->
+<!--// JS-->
+<!--export default {-->
+<!--  name:'Person',-->
+<!--}-->
+<!--&lt;!&ndash;</script>&ndash;  -->
+<!--需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件，省略注释部分-->
 
-  },
-  setup(){  //
-    // setup中无法使用this关键字，是undefined,Vue3
-    // 数据
-    // 使用let定义数据时，参数不是响应式的，无法被后续方法改变
-    let name = '张三'
-    let age = 18
-    let tel = '1388888888'
-    // 方法
-    function changeName (){
-      name = 'zhang-san'  //确实改变了name的值，但无法传到前端
-
-    }
-    function changeAge (){
-      age += 1
-
-    }
-    function showTel(){
-      alert(tel)
-    }
-    return {name,age,tel,changeName,changeAge,showTel}
-    //setup的返回值也可以是一个渲染函数
-    // return () => 'hh'  箭头函数
+<script setup lang="ts" name="Person">  //setup写在这里，会自动return
+  let name = '张三'
+  let age = 18
+  let tel = '1388888888'
+  let address = '北京'
+  // 方法
+  function changeName (){
+    name = 'zhang-san'  //确实改变了name的值，但无法传到前端
 
   }
-}
+  function changeAge (){
+    age += 1
+
+  }
+  function showTel(){
+    alert(tel)
+  }
 </script>
 
 <style scoped>
