@@ -1,41 +1,45 @@
 <template>
   <!-- html -->
   <div class="person">
-    <h2>姓名:{{name}}</h2>
-    <h2>年龄:{{age}}</h2>
-    <h2>地址:{{address}}</h2>
-    <button @click="changeName">修改名字</button>
-    <button @click="changeAge">修改年龄</button>
-    <button @click="showTel">查看联系方式</button>
+    <h2>一辆{{car.brand}}车，价值{{car.price}}万</h2>
+    <button @click="changePrice">修改汽车的价格</button>
+    <br>
+    <h2>游戏列表: </h2>
+    <ul>
+      <li v-for="g in games" :key="g.id">
+<!--   v-for循环，类似item in list  " : "很重要   -->
+        {{g.name}}
+      </li>
+    </ul>
+    <button @click="changeFirstGame">修改第一个游戏的名字</button>
+    <hr>
+    <h2>测试:{{obj.a.b.c}}</h2>
   </div>
 </template>
 
-<!--<script lang="ts">-->
-<!--// JS-->
-<!--export default {-->
-<!--  name:'Person',-->
-<!--}-->
-<!--&lt;!&ndash;</script>&ndash;  -->
-<!--需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件，省略注释部分-->
-
-<script setup lang="ts" name="Person">  //setup写在这里，会自动return
-  import {ref} from 'vue'  //引入ref，配置响应式数据
-  let name = ref('张三')  //用ref包裹数据，即可声明为响应式数据
-  let age = ref(18)  //下面的电话和地址只是字符串，而name和age变为了一个对象，
-  let tel = '1388888888'
-  let address = '北京'
-  // 方法
-  function changeName (){
-    name.value = 'zhang-san'  //加上.value表示修改的是响应式数据name的值
-
+<script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
+import {reactive} from "vue";  //引入reactive对象
+//数据
+let car = reactive({brand: '奔驰', price: 100})  //声明为响应式对象,reactive包裹后交由proxy函数进行代理
+let games = reactive([
+  {id:'g01',name:'01'},
+  {id:'g02',name:'02'},
+  {id:'g03',name:'03'}
+])
+let obj = {
+  a: {
+    b:{
+      c: 666
+    }
   }
-  function changeAge (){
-    age.value += 1
+}
 
-  }
-  function showTel(){
-    alert(tel)
-  }
+function changePrice(){
+  car.price += 10
+}
+function changeFirstGame(){
+  games[0].name='001'
+}
 </script>
 
 <style scoped>
@@ -48,5 +52,8 @@
 }
 button{
   margin: 0 5px;
+}
+li{
+  font-size: 20px;
 }
 </style>
