@@ -12,33 +12,24 @@
       </li>
     </ul>
     <button @click="changeFirstGame">修改第一个游戏的名字</button>
-    <hr>
-    <h2>测试:{{obj.a.b.c}}</h2>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
-import {reactive} from "vue";  //引入reactive对象
+import {reactive, ref} from "vue";  //引入ref
 //数据
-let car = reactive({brand: '奔驰', price: 100})  //声明为响应式对象,reactive包裹后交由proxy函数进行代理
-let games = reactive([
+let car = ref({brand: '奔驰', price: 100})  //声明为"对象类型的响应式数据"，ref可以包裹基本数据和对象，reactive只可以包裹对象
+let games = ref([
   {id:'g01',name:'01'},
   {id:'g02',name:'02'},
   {id:'g03',name:'03'}
 ])
-let obj = {
-  a: {
-    b:{
-      c: 666
-    }
-  }
-}
 
 function changePrice(){
-  car.price += 10
+  car.value.price += 10  //使用ref将对象变为响应式对象时，需要记得先.value，再从value中获取指定数据
 }
 function changeFirstGame(){
-  games[0].name='001'
+  games.value[0].name='001'
 }
 </script>
 
