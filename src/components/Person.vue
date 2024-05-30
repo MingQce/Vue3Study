@@ -1,25 +1,34 @@
 <template>
   <div class="person">
-    <h1>情况一:监视【ref】定义的【基本类型】数据</h1>
-    <h2>当前求和为:{{sum}}</h2>
-    <button @click="changeSum">sum+1</button>
+    <h1>情况二:监视【ref】定义的【对象类型】数据</h1>
+    <h2>姓名:{{person.name}}</h2>
+    <h2>年龄:{{person.age}}</h2>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changePerson">修改人</button>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
   import {computed, ref, watch} from "vue";
-  let sum = ref(0)
-  function changeSum(){
-    sum.value += 1
+  let person = ref({
+    name: "zhang-san",
+    age: 18
+  })
+  function changeName(){
+    person.value.name += '~'
   }
-  //监视
-  const stopWatch = watch(sum, (newValue, oldValue)=>{  //不用.value
-    //  写为stopWatch可以控制监视停止
-    console.log('sum变化了',newValue,oldValue)
-    if(newValue >= 10){
-      stopWatch()
-    }
-  })  //传两个参数，监视对象和回调函数
+  function changeAge(){
+    person.value.age += 1
+  }
+  function changePerson(){
+    person.value = {name: 'li-si',age: 91}
+  }
+  watch(person,(newValue,oldValue)=>{  //监视的是对象的地址值,若想监视对象内部属性的变化，需要手动开启深度监视
+    //若只修改属性，则newValue和oldValue会是同一个值，若修改对象则是不同的值
+    console.log("变化了",newValue)
+  },{deep:true,immediate: true})//  配置对象:开启深度监视（否则只监视修改的值),立即监视(初始化时便开始监视)
+
 </script>
 
 <style scoped>
