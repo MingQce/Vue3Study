@@ -1,6 +1,6 @@
 <template>
   <div class="person">
-    <h1>情况二:监视【ref】定义的【对象类型】数据</h1>
+    <h1>情况三:监视【reactive】定义的【对象类型】数据</h1>
     <h2>姓名:{{person.name}}</h2>
     <h2>年龄:{{person.age}}</h2>
     <button @click="changeName">修改名字</button>
@@ -10,25 +10,23 @@
 </template>
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
-  import {computed, ref, watch} from "vue";
-  let person = ref({
+import {computed, reactive, ref, watch} from "vue";
+  let person = reactive({
     name: "zhang-san",
     age: 18
   })
   function changeName(){
-    person.value.name += '~'
+    person.name += '~'
   }
   function changeAge(){
-    person.value.age += 1
+    person.age += 1
   }
   function changePerson(){
-    person.value = {name: 'li-si',age: 91}
+    Object.assign(person,{name: 'li-si',age: 90})  //与ref不同，没法换成新对象，只是修改了原对象的属性
   }
-  watch(person,(newValue,oldValue)=>{  //监视的是对象的地址值,若想监视对象内部属性的变化，需要手动开启深度监视
-    //若只修改属性，则newValue和oldValue会是同一个值，若修改对象则是不同的值
-    console.log("变化了",newValue)
-  },{deep:true,immediate: true})//  配置对象:开启深度监视（否则只监视修改的值),立即监视(初始化时便开始监视)
-
+  watch(person,(newValue,oldValue)=>{  //监视reactive是默认开启深度监视的
+    console.log("person变化了",newValue,oldValue)
+  },{})
 </script>
 
 <style scoped>
