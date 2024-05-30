@@ -34,12 +34,12 @@ import {reactive, watch} from "vue";
     person.car.c2 = '大众'
   }
   function changeCar(){
-    person.car= {c1:'雅迪',c2:'艾玛'}  //因为car也是一个对象，所以不用assign
+    person.car= {c1:'雅迪',c2:'艾玛'}
   }
-  watch(() => person.car  //只想监视某个值时，需要包装成一个getter函数，返回想要监视的值
+  watch([() => person.name,() => person.car.c1]  //监视多个不同类型的数据，装入数组中
   ,(newValue,oldValue)=>{
-    console.log("person变化了",newValue,oldValue)  //包装成getter函数监视整个对象时，只能监视到对象的变化，无法监视对象中的值，如监视car，只修改c1,c2无响应
-  },{deep:true})  //添加深度监视后，修改c1,c2可以发现
+    console.log("person变化了",newValue,oldValue)  //value是整个数组
+  },{deep:true})
 
 </script>
 
