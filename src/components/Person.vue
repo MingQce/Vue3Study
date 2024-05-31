@@ -1,46 +1,40 @@
 <template>
   <div class="person">
-    <h2>姓名:{{person.name}}</h2>
-    <h2>年龄:{{person.age}}</h2>
-    <h2>汽车:{{person.car.c1}}、{{person.car.c2}}</h2>
-    <button @click="changeName">修改名字</button>
-    <button @click="changeAge">修改年龄</button>
-    <button @click="changeC1">修改第一台车</button>
-    <button @click="changeC2">修改第二台车</button>
-    <button @click="changeCar">修改全部车</button>
+    <h2>需求:水温达到60度或水位达到80cm时，给服务器发送请求</h2>
+    <h2>当前水温:{{temp}}℃</h2>
+    <h2>当前水位:{{height}}cm</h2>
+    <button @click="changeTemp">修改水温</button>
+    <button @click="changeHeight">修改水位</button>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
-import {reactive, watch} from "vue";
-  let person = reactive({
-    name:'张三',
-    age:18 ,
-    car:{
-      c1:'奔驰',
-      c2:'宝马'
+  import {ref,watchEffect} from "vue";
+  let temp = ref(10)
+  let height = ref(0)
+
+  function changeTemp(){
+    if(temp.value < 100)
+    temp.value += 10
+  }
+
+  function changeHeight(){
+    height.value += 10
+  }
+  //  watch实现
+  // watch([temp,height],(newValue)=>{
+  //   //获取最新数据中的水温和水位
+  //   let [newTemp,newHeight] = newValue
+  //   if(newTemp >= 60 || newHeight >=80){
+  //     console.log('达成需求')
+  //   }
+  // })
+  watchEffect(()=> {  //watchEffect实现,响应式地追踪其依赖
+    // 不用明确指出监视的数据(函数中用到哪些属性，就监视哪些属性)
+    if (temp.value >= 60 || height.value >= 80) {
+      console.log('达成需求')
     }
   })
-  function changeName(){
-    person.name += '~'
-  }
-  function changeAge(){
-    person.age += 1
-  }
-  function changeC1(){
-    person.car.c1 = '奥迪'
-  }
-  function changeC2(){
-    person.car.c2 = '大众'
-  }
-  function changeCar(){
-    person.car= {c1:'雅迪',c2:'艾玛'}
-  }
-  watch([() => person.name,() => person.car.c1]  //监视多个不同类型的数据，装入数组中
-  ,(newValue,oldValue)=>{
-    console.log("person变化了",newValue,oldValue)  //value是整个数组
-  },{deep:true})
-
 </script>
 
 <style scoped>
