@@ -1,18 +1,25 @@
 <template>
   <div class="person">
-    ???
+    <ul>
+      <li v-for="p in plist" :key="p.id">{{p.name}} -- {{p.age}}</li>
+      <!--   :key=""给遍历的每一个值一个id，否则将默认将索引值(下标)作为id，可能导致数据错乱   -->
+    </ul>
   </div>
 </template>
 
-<script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
-  import {type PersonInter,type Persons} from '@/types'
-  // let person:PersonInter = {id:'aw',name:'张三',age:60}  //定义一个符合person接口规范的person
+<script setup lang="ts" name="Person">
+  import {defineProps,withDefaults} from 'vue'
+  import {Persons} from "@/types";
+  // 只接收list
+  // defineProps(['plist'])  //接受从App直接传过来的数据a，标签可以直接用a，script内需要赋值接收
+  //接收list并限制类型
+  // defineProps<{plist:Persons}>()  //规范只接受一个符合Persons类型的list,<{list名字:list类型}>
+  //接收list并限制类型和 必要性+指认默认值 加个问号+设置默认值引入withDefaults
+  // noinspection TypeScriptValidateTypes
+  withDefaults(defineProps<{plist?:Persons}>(),{
+    plist:() => [{id: '04',name:'刘六',age:18}]  //不能直接写数组，得弄成一个返回函数
+  })
 
-  let personList:Persons = [
-    {id:'1',name:'张三',age:60},
-    {id:'2',name:'李四',age:60},
-    {id:'3',name:'王五',age:60}
-  ]
 </script>
 
 <style scoped>  /*scoped局部样式,将样式限定在当前页面*/

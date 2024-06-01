@@ -1,12 +1,20 @@
 <template>
   <!-- html -->
-
-  <Person/>  <!--vue3允许多个根标签并列-->
-  <!-- 通过ref获取的组件实例，无法查看详细数据 -->
+  <Person/>
+  <!--  <Person :plist="personList"/>-->
+  <!--前缀加冒号就变为表达式,否则只是字符串-->
 </template>
 
 <script lang="ts" setup name="App">
   import Person from "@/components/Person.vue";
+  import {reactive} from "vue";
+  import {Persons} from '@/types'
+  let personList =reactive<Persons>([  //reactive可以用泛型规范数据
+    {id:'01',name:'张三',age:18},
+    {id:'02',name:'李四',age:20},
+    {id:'03',name:'王五',age:21}
+  ])
+  console.log(personList)
 </script>
 
 <style scoped>

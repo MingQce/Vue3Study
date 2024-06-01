@@ -3,6 +3,7 @@ export interface PersonInter {
     id:string,
     name:string,
     age:number
+    x?:number  //加个问号表示可选属性
 }
 
 //一个自定义类型
