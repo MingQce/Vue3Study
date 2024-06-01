@@ -1,43 +1,26 @@
 <template>
   <div class="person">
-    <h2>需求:水温达到60度或水位达到80cm时，给服务器发送请求</h2>
-    <h2>当前水温:{{temp}}℃</h2>
-    <h2>当前水位:{{height}}cm</h2>
-    <button @click="changeTemp">修改水温</button>
-    <button @click="changeHeight">修改水位</button>
+    <h1>中国</h1>
+    <h2 ref="title2">北京</h2>  <!--  不能用id，因为是全局的，假设App.vue中也有id为title2的元素，会优先使用App.vue中的  -->
+    <h3>东城</h3>
+    <button @click="showLog">点我输出h2这个元素</button>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">  //setup写在这里，会自动return,需要导入插件vite-vue-setup-extend，并在vite.config.js中import,才可以在标签中直接命名组件
-  import {ref,watchEffect} from "vue";
-  let temp = ref(10)
-  let height = ref(0)
+  import {ref} from "vue";
+  let title2 = ref()  //创建一个title2用于存储ref标记的内容
+  let a = ref(0)
+  let b = ref(1)
+  let c = ref(2)
 
-  function changeTemp(){
-    if(temp.value < 100)
-    temp.value += 10
+  function showLog(){
+    console.log(title2.value)
   }
-
-  function changeHeight(){
-    height.value += 10
-  }
-  //  watch实现
-  // watch([temp,height],(newValue)=>{
-  //   //获取最新数据中的水温和水位
-  //   let [newTemp,newHeight] = newValue
-  //   if(newTemp >= 60 || newHeight >=80){
-  //     console.log('达成需求')
-  //   }
-  // })
-  watchEffect(()=> {  //watchEffect实现,响应式地追踪其依赖
-    // 不用明确指出监视的数据(函数中用到哪些属性，就监视哪些属性)
-    if (temp.value >= 60 || height.value >= 80) {
-      console.log('达成需求')
-    }
-  })
+  defineExpose({a,b,c})  //声明父类可以调用的数据
 </script>
 
-<style scoped>
+<style scoped>  /*scoped局部样式,将样式限定在当前页面*/
 /*样式*/
 .person{
   background-color: skyblue;
