@@ -1,48 +1,20 @@
 <template>
   <div class="person">
-    <h2>当前求和为:{{sum}}</h2>
+    <h2>当前求和为:{{sum}},放大十倍后{{bigSum}}</h2>
     <button @click="add">sum+1</button>
+    <hr>
+    <img v-for="(dog,index) in dogList" :src="dog" :key="index">
+    <button @click="getDog">加狗</button>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">
-import {ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from "vue";
-  //数据
-  let sum = ref(0)
-  //方法
-  function add(){
-    sum.value += 1
-  }
-  // vue3生命周期 创建→挂载→更新→销毁
-  // vue是自下而上的，解析完所有子，父才算解析完,所以子会比父先创建
+  //使用hooks引入与【求和】和【狗】相关的数据和函数
+  import useSum from "@/hooks/useSum";
+  import useDog from "@/hooks/useDog";
+  const {sum,add,bigSum} = useSum()
+  const {dogList,getDog} = useDog()
 
-  // 创建 beforecreate created
-  console.log('创建')
-
-  // 挂载
-  onBeforeMount(()=>{  //在挂载vue3调用onBeforeMount指定的函数
-    console.log('挂载前')
-  })
-  //挂载完毕
-  onMounted(()=>{
-    console.log('挂载完毕')
-  })
-  //更新前
-  onBeforeUpdate(()=>{
-    console.log('更新前')
-  })
-  //更新完毕
-  onUpdated(()=>{
-    console.log('更新完毕')
-  })
-  //卸载前
-  onBeforeUnmount(()=>{
-    console.log('卸载前')
-  })
-  //卸载完毕
-  onUnmounted(()=>{
-    console.log('卸载完毕')
-  })
 </script>
 
 <style scoped>  /*scoped局部样式,将样式限定在当前页面*/
@@ -58,5 +30,9 @@ button{
 }
 li{
   font-size: 20px;
+}
+img{
+  height: 100px;
+  margin-left: 10px;
 }
 </style>
