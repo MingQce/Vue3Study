@@ -1,25 +1,48 @@
 <template>
   <div class="person">
-    <ul>
-      <li v-for="p in plist" :key="p.id">{{p.name}} -- {{p.age}}</li>
-      <!--   :key=""给遍历的每一个值一个id，否则将默认将索引值(下标)作为id，可能导致数据错乱   -->
-    </ul>
+    <h2>当前求和为:{{sum}}</h2>
+    <button @click="add">sum+1</button>
   </div>
 </template>
 
 <script setup lang="ts" name="Person">
-  import {defineProps,withDefaults} from 'vue'
-  import {Persons} from "@/types";
-  // 只接收list
-  // defineProps(['plist'])  //接受从App直接传过来的数据a，标签可以直接用a，script内需要赋值接收
-  //接收list并限制类型
-  // defineProps<{plist:Persons}>()  //规范只接受一个符合Persons类型的list,<{list名字:list类型}>
-  //接收list并限制类型和 必要性+指认默认值 加个问号+设置默认值引入withDefaults
-  // noinspection TypeScriptValidateTypes
-  withDefaults(defineProps<{plist?:Persons}>(),{
-    plist:() => [{id: '04',name:'刘六',age:18}]  //不能直接写数组，得弄成一个返回函数
-  })
+import {ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted} from "vue";
+  //数据
+  let sum = ref(0)
+  //方法
+  function add(){
+    sum.value += 1
+  }
+  // vue3生命周期 创建→挂载→更新→销毁
+  // vue是自下而上的，解析完所有子，父才算解析完,所以子会比父先创建
 
+  // 创建 beforecreate created
+  console.log('创建')
+
+  // 挂载
+  onBeforeMount(()=>{  //在挂载vue3调用onBeforeMount指定的函数
+    console.log('挂载前')
+  })
+  //挂载完毕
+  onMounted(()=>{
+    console.log('挂载完毕')
+  })
+  //更新前
+  onBeforeUpdate(()=>{
+    console.log('更新前')
+  })
+  //更新完毕
+  onUpdated(()=>{
+    console.log('更新完毕')
+  })
+  //卸载前
+  onBeforeUnmount(()=>{
+    console.log('卸载前')
+  })
+  //卸载完毕
+  onUnmounted(()=>{
+    console.log('卸载完毕')
+  })
 </script>
 
 <style scoped>  /*scoped局部样式,将样式限定在当前页面*/
