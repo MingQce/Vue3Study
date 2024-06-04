@@ -3,7 +3,22 @@
     <!--  导航区  -->
     <ul>
       <li v-for="news in newsList" :key="news.id">
-        <RouterLink to="/news/detail">{{news.title}}</RouterLink>  <!--    要注意这里是子级路由，需要从父级路径开始写    -->
+        <!--    要注意这里是子级路由，需要从父级路径开始写    -->
+        <!--    query传参,需要:to 然后使用反引号``,转为模板字符串,参数用${}    -->
+        <!--    <RouterLink :to="`/news/detail?id=${news.id}&title=${news.title}&content=${news.content}`">{{news.title}}</RouterLink>-->
+        <!--    query传参的传对象写法    -->
+        <RouterLink
+            :to="{
+              name:'xinwen_detail',
+              query:{
+                id:news.id,
+                title:news.title,
+                content:news.content
+              }
+            }"
+        >
+          {{news.title}}
+        </RouterLink>
       </li>
     </ul>
     <!--  展示区  -->
@@ -35,10 +50,12 @@
 
 .news ul {
   margin-top: 30px;
-  list-style: none;
+  /*list-style: none;*/
   padding-left: 10px;
 }
-
+.news li::marker{
+  color: #64967E;
+}
 .news li > a {
   font-size: 18px;
   line-height: 40px;

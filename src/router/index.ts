@@ -24,6 +24,7 @@ const router = createRouter({
             component:News,  //组件
             children:[  //子级路由
                 {
+                    name:'xinwen_detail',
                     path:'detail',  //子级路由不需要'/'
                     component:Detail
                 }
