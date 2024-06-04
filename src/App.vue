@@ -4,9 +4,9 @@
   <!--  导航区  -->
     <div class="navigate">
       <!--    active-class="active"激活时使用样式   -->
-      <RouterLink to="/home" active-class="active">首页</RouterLink>
-      <RouterLink to="/news" active-class="active">新闻</RouterLink>
-      <RouterLink to="/about" active-class="active">关于</RouterLink>
+      <RouterLink to="/home" active-class="active">首页</RouterLink>  <!--   to的字符串写法，路径跳转   -->
+      <RouterLink :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>  <!--   to的字符串写法，名字跳转   -->
+      <RouterLink :to="{path:'/about'}" active-class="active">关于</RouterLink>  <!--   to的对象写法,可以带参数、   -->
     </div>
   <!--  展示区  -->
     <div class="main-content">

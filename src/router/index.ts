@@ -13,14 +13,17 @@ const router = createRouter({
     //  hash模式:兼容性更好,SEO优化方面相对较差
     routes:[  //路由规则(一组对应关系,写成对象)
         {
+            name:'zhuye',
             path:'/home',  //路径
             component:Home  //组件
         },
         {
+            name:'xinwen',
             path:'/news',  //路径
             component:News  //组件
         },
         {
+            name:'guanyu',
             path:'/about',  //路径
             component:About  //组件
         }
