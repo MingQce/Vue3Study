@@ -6,6 +6,7 @@ import {createRouter,createWebHistory} from "vue-router";
 import Home from '@/pages/Home.vue'
 import News from '@/pages/News.vue'
 import About from '@/pages/About.vue'
+import Detail from "@/pages/Detail.vue";
 //2.创建路由器
 const router = createRouter({
     history:createWebHistory(),  //vue3要求：需要制定路由器的工作模式
@@ -14,13 +15,19 @@ const router = createRouter({
     routes:[  //路由规则(一组对应关系,写成对象)
         {
             name:'zhuye',
-            path:'/home',  //路径
+            path:'/',  //路径
             component:Home  //组件
         },
         {
             name:'xinwen',
             path:'/news',  //路径
-            component:News  //组件
+            component:News,  //组件
+            children:[  //子级路由
+                {
+                    path:'detail',  //子级路由不需要'/'
+                    component:Detail
+                }
+            ]
         },
         {
             name:'guanyu',

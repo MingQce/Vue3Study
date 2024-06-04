@@ -1,16 +1,27 @@
 <template>
   <div className="news">
+    <!--  导航区  -->
     <ul>
-      <li><a href="#">新闻001</a></li>
-      <li><a href="#">新闻002</a></li>
-      <li><a href="#">新闻003</a></li>
-      <li><a href="#">新闻004</a></li>
+      <li v-for="news in newsList" :key="news.id">
+        <RouterLink to="/news/detail">{{news.title}}</RouterLink>  <!--    要注意这里是子级路由，需要从父级路径开始写    -->
+      </li>
     </ul>
+    <!--  展示区  -->
+    <div class="news-content">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts" name="News">
+  import {reactive} from "vue";
 
+  const newsList = reactive([
+    {id:'01',title:'抗癌食物',content:'西蓝花'},
+    {id:'02',title:'水果',content:'苹果'},
+    {id:'03',title:'蔬菜',content:'菠菜'},
+    {id:'04',title:'球',content:'篮球'}
+  ])
 </script>
 
 <style scoped>
