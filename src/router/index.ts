@@ -9,6 +9,8 @@ import About from '@/pages/About.vue'
 //2.创建路由器
 const router = createRouter({
     history:createWebHistory(),  //vue3要求：需要制定路由器的工作模式
+    //  history模式:url美观，后端项目上线后需要服务端配合处理路径问题
+    //  hash模式:兼容性更好,SEO优化方面相对较差
     routes:[  //路由规则(一组对应关系,写成对象)
         {
             path:'/home',  //路径
