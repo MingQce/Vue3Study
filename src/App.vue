@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <h2 class="title">Vue路由测试</h2>
+    <Header/>
   <!--  导航区  -->
     <div class="navigate">
       <!--    active-class="active"激活时使用样式   -->
@@ -17,7 +17,7 @@
 
 <script lang="ts" setup name="App">
   import {RouterView,RouterLink} from "vue-router";
-
+  import Header from "@/components/Header.vue";
 </script>
 
 <style>
