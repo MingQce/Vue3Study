@@ -4,7 +4,6 @@
     <ul>
       <li v-for="news in newsList" :key="news.id">
         <!--  要注意这里是子级路由，需要从父级路径开始写  -->
-
         <RouterLink
             :to="{
               name:'xinwen_detail',
