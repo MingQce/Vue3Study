@@ -4,12 +4,11 @@
     <ul>
       <li v-for="news in newsList" :key="news.id">
         <!--  要注意这里是子级路由，需要从父级路径开始写  -->
-        <!--  使用params参数,字符串写法-->
-        <!--<RouterLink :to="`/news/detail/${news.id}/${news.title}/${news.content}`">{{news.title}}</RouterLink>-->
+
         <RouterLink
             :to="{
-              name:'xinwen_detail',  //params这里不能用path，会被忽略
-              params:{  //坑：不能在里面塞对象和数组.占位了以后不能不传(丢失必要参数,可加?解决)
+              name:'xinwen_detail',
+              query:{
                 id:news.id,
                 title:news.title,
                 content:news.content

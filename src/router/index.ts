@@ -25,9 +25,22 @@ const router = createRouter({
             children:[  //子级路由
                 {
                     name:'xinwen_detail',
-                    path:'detail/:id?/:title?/:content?',  //子级路由前缀不需要'/',使用params参数时需要提前占位,可加?配置参数必要性
+                    path:'detail',  //子级路由前缀不需要'/',使用params参数时需要提前占位,可加?配置参数必要性
                     component:Detail,
-                    props:true  //配置后自动把占位的params参数转为props传给组件
+                    //1.将路由收到的所有params参数转为props传给组件
+                    // props:true
+                    // 2.函数写法 自己决定将什么作为props给路由组件
+                    props(route){  //query需要这么写
+                        return route.query
+                    }
+                    //3.对象写法 自己决定将什么作为props给路由组件
+                    // props:{  //底层：<Detail a=100 b=200 c=300/>
+                    //     a:100,
+                    //     b:200,
+                    //     c:300
+                    // }
+
+
                 }
             ]
         },
