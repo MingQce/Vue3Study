@@ -18,6 +18,7 @@
 <script lang="ts" setup name="App">
   import {RouterView,RouterLink} from "vue-router";
   import Header from "@/components/Header.vue";
+
 </script>
 
 <style>

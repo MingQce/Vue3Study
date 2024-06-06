@@ -9,7 +9,7 @@
         <RouterLink
             :to="{
               name:'xinwen_detail',  //params这里不能用path，会被忽略
-              params:{  //坑：不能在里面塞对象和数组,占位了以后不能不传(丢失必要参数,可加?解决)
+              params:{  //坑：不能在里面塞对象和数组.占位了以后不能不传(丢失必要参数,可加?解决)
                 id:news.id,
                 title:news.title,
                 content:news.content
