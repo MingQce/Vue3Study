@@ -7,7 +7,7 @@
       <!--    路由默认使用push，可以跳转并返回    -->
       <!--   可以修改为replace,变为无法返回   -->
       <!--   RouterLink本质是a标签   -->
-      <RouterLink to="/" active-class="active">首页</RouterLink>  <!--   to的字符串写法，路径跳转   -->
+      <RouterLink to="/home" active-class="active">首页</RouterLink>  <!--   to的字符串写法，路径跳转   -->
       <RouterLink :to="{name:'xinwen'}" active-class="active">新闻</RouterLink>  <!--   to的字符串写法，名字跳转   -->
       <RouterLink :to="{path:'/about'}" active-class="active">关于</RouterLink>  <!--   to的对象写法,可以带参数、   -->
     </div>

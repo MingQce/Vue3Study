@@ -15,7 +15,7 @@ const router = createRouter({
     routes:[  //路由规则(一组对应关系,写成对象)
         {
             name:'zhuye',
-            path:'/',  //路径
+            path:'/home',  //路径
             component:Home  //组件
         },
         {
@@ -48,6 +48,11 @@ const router = createRouter({
             name:'guanyu',
             path:'/about',  //路径
             component:About  //组件
+        },
+        {
+            // 重定向到主页
+            path:'/',
+            redirect:'/home'
         }
     ]
 })
