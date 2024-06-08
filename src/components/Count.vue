@@ -1,7 +1,7 @@
 <template>
   <div class="count">
-    <h2>当前求和为:{{countStore.sum}}</h2>
-    <h3>欢迎来到:{{countStore.address}}</h3>
+    <h2>当前求和为:{{sum}}</h2>
+    <h3>欢迎来到:{{address}}</h3>
     <select v-model.number="n">  <!--   用户选择的数字,.number转为number类型   -->
       <option value="1">1</option>
       <option value="2">2</option>
@@ -15,9 +15,10 @@
 <script setup lang="ts" name="Count">
 import {ref} from "vue";
 import {useCountStore} from "@/store/count";
+import {storeToRefs} from "pinia";
 //打印reactive中的ref类型会被拆包，不需要.value
 const countStore = useCountStore()  //保存count相关的store
-
+const {sum,address} = storeToRefs(countStore)  //storeToRefs将store中的指定数据转为响应式,不影响方法;不推荐toRefs,直接用toRefs会导致整个store全变ref
 let n = ref(1)
 
 //方法

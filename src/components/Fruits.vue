@@ -8,10 +8,7 @@
 </template>
 
 <script setup lang="ts" name="Fruits">
-  import {reactive} from "vue";
-  import {nanoid} from "nanoid";
-  import {fruitsInter, useFruitsStore} from "@/store/fruits";
-  import {useCountStore} from "@/store/count";  //引入接口
+  import {useFruitsStore} from "@/store/fruits";
   //数据
   const fruitsStore = useFruitsStore()
   const Fruits_basket = [
@@ -19,20 +16,9 @@
     {title:'草莓'},
     {title:'蔓越莓'}
   ];
-  console.log(fruitsStore)
   //方法
-  async function getFruit(){  //修改数据
-    /*
-    //获取对象
-    let obj = await Fruits_basket.pop()
-    //包装为fruit
-    if(obj){  //判断是否还有剩余的水果对象
-      let fruit = {id:nanoid(),title:obj.title}
-      fruits.unshift(fruit)  //后来的放前面
-    }else{
-      console.log("没有水果了")
-    }
-     */
+  function getFruit(){
+    fruitsStore.getAFruit(Fruits_basket)
   }
 </script>
 
