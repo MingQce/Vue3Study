@@ -1,6 +1,6 @@
 <template>
   <div class="count">
-    <h2>当前求和为:{{sum}}</h2>
+    <h2>当前求和为:{{countStore.sum}}</h2>
     <select v-model.number="n">  <!--   用户选择的数字,.number转为number类型   -->
       <option value="1">1</option>
       <option value="2">2</option>
@@ -13,17 +13,22 @@
 
 <script setup lang="ts" name="Count">
 import {ref} from "vue";
-
+import {useCountStore} from "@/store/count";
+//打印reactive中的ref类型会被拆包，不需要.value
+const countStore = useCountStore()
+//拿到state中数据的两种方法
+// console.log('@',countStore.sum)
+// console.log('@',countStore.$state.sum)
 //数据
-let sum = ref(1)
+
 let n = ref(1)
 
 //方法
 function add(){
-  sum.value += n.value
+  countStore.sum += n.value
 }
 function minus(){
-  sum.value -= n.value
+  countStore.sum -= n.value
 }
 
 </script>

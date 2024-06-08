@@ -2,7 +2,7 @@
   <div class="fruit">
     <button @click="getFruit">获取一种水果</button>
     <ul>
-      <li v-for="fruit in fruits" :key="fruit.id">{{fruit.title}}</li>
+      <li v-for="fruit in fruitsStore.fruits" :key="fruit.id">{{fruit.title}}</li>
     </ul>
   </div>
 </template>
@@ -10,23 +10,19 @@
 <script setup lang="ts" name="Fruits">
   import {reactive} from "vue";
   import {nanoid} from "nanoid";
-  interface fruitInter{  //定义一个水果对象
-    id:string,
-    title:string
-  }
-  type fruitsInter = fruitInter[]  //定义fruits为一个装有多个水果对象的数组
+  import {fruitsInter, useFruitsStore} from "@/store/fruits";
+  import {useCountStore} from "@/store/count";  //引入接口
   //数据
-  let fruits:fruitsInter = reactive([  //使用fruitsInter接口进行规范
-
-  ])
+  const fruitsStore = useFruitsStore()
   const Fruits_basket = [
     {title:'蓝莓'},
     {title:'草莓'},
     {title:'蔓越莓'}
   ];
-
+  console.log(fruitsStore)
   //方法
-  async function getFruit(){
+  async function getFruit(){  //修改数据
+    /*
     //获取对象
     let obj = await Fruits_basket.pop()
     //包装为fruit
@@ -36,7 +32,7 @@
     }else{
       console.log("没有水果了")
     }
-
+     */
   }
 </script>
 
