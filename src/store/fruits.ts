@@ -9,13 +9,6 @@ export interface fruitInter{  //定义一个水果对象
 }
 export type fruitsInter = fruitInter[]  //定义fruits为一个装有多个水果对象的数组
 export const useFruitsStore = defineStore('fruits',{  //使用计数相关store
-    //配置
-    state(){  //真正存储数据的地方,使用reactive包装
-        let fruits:fruitsInter = reactive([])
-        return{
-            fruits
-        }
-    },
     actions:{
         getAFruit(Fruits_basket){
             //获取对象
@@ -27,6 +20,13 @@ export const useFruitsStore = defineStore('fruits',{  //使用计数相关store
             }else{
                 console.log("没有水果了")
             }
+        }
+    },
+    //配置
+    state(){  //真正存储数据的地方,使用reactive包装
+        let fruits:fruitsInter = reactive([])
+        return{
+            fruits
         }
     }
 })

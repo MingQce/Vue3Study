@@ -12,7 +12,15 @@ export const useCountStore = defineStore('count',{  //使用计数相关store
     state(){  //真正存储数据的地方,使用reactive包装
         return{
             sum:0,  //是ref包装的
-            address:'北京'
+            address:'bei-jing'
+        }
+    },
+    getters:{  //可以在count.vue中取出使用
+        //1
+        bigSum:state => state.sum * 10,
+        //2
+        upperAddress():string{
+            return this.address.toUpperCase()
         }
     }
 })
