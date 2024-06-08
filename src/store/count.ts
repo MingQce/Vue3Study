@@ -17,7 +17,7 @@ export const useCountStore = defineStore('count',{  //使用计数相关store
     },
     getters:{  //可以在count.vue中取出使用
         //1
-        bigSum:state => state.sum * 10,
+        bigSum:state => state.sum * 10,  //ps:箭头函数不支持用this
         //2
         upperAddress():string{
             return this.address.toUpperCase()
