@@ -1,6 +1,7 @@
 <template>
   <div class="count">
     <h2>当前求和为:{{countStore.sum}}</h2>
+    <h3>欢迎来到:{{countStore.address}}</h3>
     <select v-model.number="n">  <!--   用户选择的数字,.number转为number类型   -->
       <option value="1">1</option>
       <option value="2">2</option>
@@ -15,17 +16,23 @@
 import {ref} from "vue";
 import {useCountStore} from "@/store/count";
 //打印reactive中的ref类型会被拆包，不需要.value
-const countStore = useCountStore()
-//拿到state中数据的两种方法
-// console.log('@',countStore.sum)
-// console.log('@',countStore.$state.sum)
-//数据
+const countStore = useCountStore()  //保存count相关的store
 
 let n = ref(1)
 
 //方法
 function add(){
-  countStore.sum += n.value
+  //修改方式一:直接修改
+  // countStore.sum += n.value
+  // countStore.address = '上海'
+  //修改方式二:使用patch
+  // countStore.$patch({
+  //   sum:888,
+  //   address:'上海'
+  // })
+  //修改方式三:使用actions
+  countStore.increment(n.value)
+
 }
 function minus(){
   countStore.sum -= n.value
