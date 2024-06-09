@@ -2,16 +2,22 @@
   <div class="child">
     <h3>子组件</h3>
 		<h4>玩具：{{ toy }}</h4>
-		<button @click="emit('send-toy',toy)">测试</button>
+		<button @click="emit('send-toy',toy)">测试</button><!--  事件,参数  -->
+
   </div>
 </template>
 
 <script setup lang="ts" name="Child">
-	import { ref } from "vue";
+	import { ref,onMounted } from "vue";
 	// 数据
 	let toy = ref('奥特曼')
 	// 声明事件
 	const emit =  defineEmits(['send-toy'])
+  onMounted(()=>{
+    setTimeout(()=>{
+      emit('send-toy',toy.value)  //.value!!!!!!!!!!!!!!!!
+    },3000)
+  })
 </script>
 
 <style scoped>
