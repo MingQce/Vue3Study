@@ -20,8 +20,8 @@
     money.value -= value
   }
 
-  // 向后代提供数据
-  provide('moneyContext',{money,updateMoney})
+  // 向后代提供数据,真正实现祖孙之间的数据传递，不打扰中间的子组件
+  provide('moneyContext',{money,updateMoney})  //包括数据money和方法updateMoney的对象
   provide('car',car)
 
 </script>
