@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts" name="Child1">
+  //child1中按钮被点击后触发事件send-toy
 	import {ref} from 'vue'
 	import emitter from '@/utils/emitter';
 

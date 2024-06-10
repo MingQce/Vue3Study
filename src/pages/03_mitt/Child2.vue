@@ -16,11 +16,12 @@
 	// 给emitter绑定send-toy事件
 	emitter.on('send-toy',(value:any)=>{
 		toy.value = value
-	})
+	})//send-toy事件触发后马上接收参数并为child2的toy赋值
 	// 在组件卸载时解绑send-toy事件
 	onUnmounted(()=>{
 		emitter.off('send-toy')
 	})
+  // emitter.all.clear()  清空所有emitter
 </script>
 
 <style scoped>
