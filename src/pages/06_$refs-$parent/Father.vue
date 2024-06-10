@@ -4,33 +4,20 @@
 		<h4>房产：{{ house }}</h4>
 		<button @click="changeToy">修改Child1的玩具</button>
 		<button @click="changeComputer">修改Child2的电脑</button>
+    <!--$parent:子→父 $refs:父→子,类型都为对象-->
 		<button @click="getAllChild($refs)">让所有孩子的书变多</button>
-		<Child1 ref="c1"/>
-		<Child2 ref="c2"/>
+		<Child1 ref="c1"/><!--  c1代表child1所有交出的ref类型响应式数据  -->
+		<Child2 ref="c2"/><!--  组件调用直接ref=""就行  -->
+    <!--    -->
 	</div>
 </template>
 
 <script setup lang="ts" name="Father">
 	import Child1 from './Child1.vue'
 	import Child2 from './Child2.vue'
-	import { ref,reactive } from "vue";
+	import { ref } from "vue";
 	let c1 = ref()
 	let c2 = ref()
-
-	// 注意点：当访问obj.c的时候，底层会自动读取value属性，因为c是在obj这个响应式对象中的
-	/* let obj = reactive({
-		a:1,
-		b:2,
-		c:ref(3)
-	})
-	let x = ref(4)
-
-	console.log(obj.a)
-	console.log(obj.b)
-	console.log(obj.c)
-	console.log(x) */
-	
-
 	// 数据
 	let house = ref(4)
 	// 方法

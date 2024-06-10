@@ -19,7 +19,7 @@
 	}
 
 	// 把数据交给外部
-	defineExpose({toy,book})
+	defineExpose({toy,book})  //允许外部修改交出的数据
 
 </script>
 
