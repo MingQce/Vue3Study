@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts" name="GrandChild">
-	defineProps(['a','b','c','d','x','y','updateA'])
+	defineProps(['a','b','c','d','x','y','updateA'])  //定义接收数据
 </script>
 
 <style scoped>
