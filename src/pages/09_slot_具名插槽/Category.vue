@@ -1,5 +1,6 @@
 <template>
   <div class="category">
+    <!--  为插槽命名，安排放入顺序  -->
     <slot name="s1">默认内容1</slot>
     <slot name="s2">默认内容2</slot>
   </div>

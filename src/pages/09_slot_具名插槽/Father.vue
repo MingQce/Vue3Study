@@ -3,6 +3,7 @@
     <h3>父组件</h3>
     <div class="content">
       <Category>
+        <!--    指定插入的插槽,v-slot: 或#   -->
         <template v-slot:s2>
           <ul>
             <li v-for="g in games" :key="g.id">{{ g.name }}</li>
